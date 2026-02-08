@@ -1,0 +1,8 @@
+{
+    "name": "AI Assistant",
+    "author": "cvlc",
+    "description": "Automatically tags, retitles, summarizes articles, and generates feed-wide summaries using OpenAI.",
+    "version": "0.1",
+    "entrypoint": "AIAssistant",
+    "type": "system"
+}

@@ -1,0 +1,57 @@
+<?php
+function inputField($name, $label, $value, $type='text') {
+    echo '<div>';
+    echo "<label for=\"{$name}\">{$label}</label><br/>";
+    echo "<input type=\"{$type}\" name=\"{$name}\" id=\"{$name}\" value=\"".htmlspecialchars($value, ENT_QUOTES)."\" style=\"width:100%;\"/>";
+    echo '</div><br/>';
+}
+
+$conf = Minz_Configuration::get('system');
+?>
+
+<h1>AI Assistant Configuration</h1>
+<form method="post" action="<?php echo _url('extension','configure','e', urlencode($this->getName())); ?>">
+    <input type="hidden" name="_csrf" value="<?php echo FreshRSS_Auth::csrfToken(); ?>" />
+
+    <h2>Article Processing</h2>
+    <?php
+        inputField('openai_baseurl_article', 'OpenAI Base URL (Article)', $conf->openai_baseurl_article ?? '');
+        inputField('openai_key_article', 'OpenAI API Key (Article)', $conf->openai_key_article ?? '');
+        inputField('openai_model_article', 'OpenAI Model (Article)', $conf->openai_model_article ?? '');
+        inputField('openai_temp_article', 'Temperature (Article)', $conf->openai_temp_article ?? '');
+    ?>
+    <label for="openai_prompt_article">Article Prompt Template</label><br/>
+    <textarea name="openai_prompt_article" id="openai_prompt_article" rows="5" style="width:100%;"><?php
+        echo htmlspecialchars($conf->openai_prompt_article ?? '', ENT_QUOTES);
+    ?></textarea>
+
+    <hr/>
+
+    <h2>Feed Roundup</h2>
+    <?php
+        inputField('openai_baseurl_roundup', 'OpenAI Base URL (Roundup)', $conf->openai_baseurl_roundup ?? '');
+        inputField('openai_key_roundup', 'OpenAI API Key (Roundup)', $conf->openai_key_roundup ?? '');
+        inputField('openai_model_roundup', 'OpenAI Model (Roundup)', $conf->openai_model_roundup ?? '');
+        inputField('openai_temp_roundup', 'Temperature (Roundup)', $conf->openai_temp_roundup ?? '');
+    ?>
+    <label for="openai_prompt_roundup">Roundup Prompt Template</label><br/>
+    <textarea name="openai_prompt_roundup" id="openai_prompt_roundup" rows="5" style="width:100%;"><?php
+        echo htmlspecialchars($conf->openai_prompt_roundup ?? '', ENT_QUOTES);
+    ?></textarea>
+
+    <div>
+        <label for="mark_read_after_summary">Mark Articles as Read After Summarization</label><br/>
+        <input type="checkbox" name="mark_read_after_summary" id="mark_read_after_summary"
+            value="1" <?php echo ($conf->mark_read_after_summary ?? '0') === '1' ? 'checked' : ''; ?> />
+    </div>
+
+    <hr/>
+
+    <h2>Token Limit</h2>
+    <?php
+        inputField('openai_max_tokens', 'Max tokens (chars)', $conf->openai_max_tokens ?? '', 'number');
+    ?>
+
+    <br/>
+    <input type="submit" value="Save Configuration"/>
+</form>
