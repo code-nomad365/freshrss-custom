@@ -7,5 +7,6 @@ if [ ! -f /var/www/FreshRSS/data/config.php ]; then
     chown -R www-data:www-data /var/www/FreshRSS/data
 fi
 
-# 執行 FreshRSS 原始的 entrypoint
-exec /var/www/FreshRSS/Docker/entrypoint.sh "$@"
+# 執行 FreshRSS 原始的 entrypoint + CMD
+cd /var/www/FreshRSS
+exec ./Docker/entrypoint.sh "$@"
