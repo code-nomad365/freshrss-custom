@@ -1,0 +1,8 @@
+*Zone.Identifier
+/vendor/
+/node_modules/
+.phpunit.cache/
+composer.lock
+.DS_Store
+*.log
+

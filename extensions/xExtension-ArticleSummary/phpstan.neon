@@ -1,0 +1,14 @@
+parameters:
+  level: 4
+  paths:
+    - .
+  excludePaths:
+    - vendor
+    - node_modules
+    - tests
+    - phpstan-bootstrap.php
+  bootstrapFiles:
+    - %currentWorkingDirectory%/phpstan-bootstrap.php
+  ignoreErrors:
+    # Ignore DOMNode method errors due to stub limitations
+    - '#Call to an undefined method DOMNode::getAttribute\(\)#'

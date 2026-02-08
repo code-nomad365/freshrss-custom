@@ -1,0 +1,28 @@
+<?php
+$oai_url = FreshRSS_Context::$user_conf->oai_url;
+$oai_key = FreshRSS_Context::$user_conf->oai_key;
+$oai_model = FreshRSS_Context::$user_conf->oai_model;
+$oai_prompt = FreshRSS_Context::$user_conf->oai_prompt;
+$oai_provider = FreshRSS_Context::$user_conf->oai_provider ?: 'openai'; // Default to OpenAI
+?>
+<form action="<?php echo _url('extension', 'configure', 'e', urlencode($this->getName())); ?>" method="post">
+  <input type="hidden" name="_csrf" value="<?php echo FreshRSS_Auth::csrfToken(); ?>" />
+  <label for="oai_provider"><?php echo _t('ArticleSummary.config.ai_provider'); ?></label>
+  <select name="oai_provider">
+      <option value="openai" <?php echo ($oai_provider == 'openai' ? 'selected' : ''); ?>><?php echo _t('ArticleSummary.config.openai'); ?></option>
+      <option value="ollama" <?php echo ($oai_provider == 'ollama' ? 'selected' : ''); ?>><?php echo _t('ArticleSummary.config.ollama'); ?></option>
+   </select>
+ 
+ <div id="common_config">
+    <label for="oai_url"><?php echo _t('ArticleSummary.config.base_url'); ?></label>
+    <input type="text" name="oai_url" id="oai_url" value="<?php echo $oai_url; ?>">
+    <label for="oai_key"><?php echo _t('ArticleSummary.config.api_key'); ?></label>
+    <input type="text" name="oai_key" id="oai_key" value="<?php echo $oai_key; ?>">
+    <label for="oai_model"><?php echo _t('ArticleSummary.config.model_name'); ?></label>
+    <input type="text" name="oai_model" id="oai_model" value="<?php echo $oai_model; ?>">
+    <label for="oai_prompt"><?php echo _t('ArticleSummary.config.prompt'); ?></label>
+    <textarea name="oai_prompt" id="oai_prompt" placeholder="<?php echo _t('ArticleSummary.config.default_prompt'); ?>"><?php echo $oai_prompt; ?></textarea>
+  </div>
+  <hr />
+  <button type="submit"><?php echo _t('ArticleSummary.config.save'); ?></button>
+</form>

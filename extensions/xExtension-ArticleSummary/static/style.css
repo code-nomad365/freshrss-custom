@@ -1,0 +1,118 @@
+:root {
+  /* Default theme variables (can be overridden by user themes) */
+  --oai-bg-color: #f8f8f8;
+  --oai-border-color: #e0e0e0;
+  --oai-text-color: #333;
+  --oai-btn-bg: #6366f1;
+  --oai-btn-text: #fff;
+  --oai-btn-hover-bg: #4f46e5;
+  --oai-border-radius: 8px;
+}
+
+/* Nord Theme specific variables (will be used if Nord theme is active) */
+.theme-nord :root {
+  --oai-bg-color: #2e3440;
+  --oai-border-color: #434c5e;
+  --oai-text-color: #d8dee9;
+  --oai-btn-bg: #5e81ac;
+  --oai-btn-text: #e5e9f0;
+  --oai-btn-hover-bg: #81a1c1;
+}
+
+.oai-summary-wrap {
+  background: var(--oai-bg-color, #f8f8f8);
+  padding: 1.2em;
+  margin-bottom: 1.5em;
+  border: 1px solid var(--oai-border-color, #e0e0e0);
+  border-radius: var(--oai-border-radius, 8px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.oai-summary-btn {
+  font-size: 1.1em;
+  padding: 0.5em 1em;
+  margin-bottom: 0.8em;
+  background-color: var(--oai-btn-bg, #6366f1);
+  color: var(--oai-btn-text, #fff);
+  border: none;
+  border-radius: var(--oai-border-radius, 6px);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: 500;
+}
+
+.oai-summary-btn:hover {
+  background-color: var(--oai-btn-hover-bg, #4f46e5);
+}
+
+.oai-summary-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.oai-summary-content {
+  color: var(--oai-text-color, #333);
+  line-height: 1.6;
+}
+
+.oai-summary-content h1,
+.oai-summary-content h2,
+.oai-summary-content h3,
+.oai-summary-content h4,
+.oai-summary-content h5,
+.oai-summary-content h6 {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+  color: var(--oai-text-color, #333);
+}
+
+.oai-summary-content h1 {
+  font-size: 1.5em;
+}
+
+.oai-summary-content h2 {
+  font-size: 1.3em;
+}
+
+.oai-summary-content h3 {
+  font-size: 1.1em;
+}
+
+.oai-summary-content p,
+.oai-summary-content div {
+  margin-bottom: 0.8em;
+}
+
+.oai-summary-content ul,
+.oai-summary-content ol {
+  margin-bottom: 0.8em;
+  padding-left: 1.5em;
+}
+
+.oai-summary-content li {
+  margin-bottom: 0.4em;
+}
+
+/* Loading state */
+.oai-loading .oai-summary-btn::after {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-left: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s linear infinite;
+}
+
+/* Error state */
+.oai-error .oai-summary-content {
+  color: #ef4444;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
